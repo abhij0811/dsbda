@@ -1,0 +1,83 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("StudentPerformance..csv")
+df.head(15)
+
+df.isnull()
+
+series = pd.isnull(df["reading_score"])
+df[series]
+
+series = pd.notnull(df["reading_score"])
+df[series]
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+df['gender'] = le.fit_transform(df['gender'])
+newdf=df
+df
+
+nap=df
+nap.fillna(0)
+
+m_v=df['math_score'].mean()
+df['math_score'].fillna(value=m_v, inplace=True)
+df
+
+nap.replace(to_replace = np.nan, value = -99)
+
+nap.dropna()
+
+nap.dropna(how = 'all')
+
+nap.dropna(axis = 1)
+
+nd = nap.dropna(axis = 0, how = 'any')
+nd
+
+col = ['math_score', 'reading_score', 'writting_score', 'placement_score',]
+df.boxplot(col)
+plt.show()
+
+print(np.where(df['math_score']>90))
+(array([0, 2]),)
+
+print(np.where(df['reading_score']<25))
+(array([], dtype=int64),)
+
+print(np.where(df['writting_score']<30))
+(array([], dtype=int64),)
+
+fig, ax = plt.subplots(figsize = (18,10))
+ax.scatter(df['placement_score'],df['placement_offer_count'] )
+
+plt.show()
+
+sorted_rscore = sorted(df['math_score'])
+sorted_rscore
+
+q1 = np.percentile(sorted_rscore, 25)
+q3 = np.percentile(sorted_rscore, 75)
+
+import numpy as np
+from scipy import stats
+
+z = np.abs(stats.zscore(df['math_score']))
+
+print(z)
+
+threshold = 0.18
+
+sample_outliers = np.where(z < threshold)
+sample_outliers
+
+sorted_rscore= sorted(df['math_score'])
+sorted_rscore
+q1 = np.percentile(sorted_rscore, 25)
+q3 = np.percentile(sorted_rscore, 75)
+print(q1,q3)
+
+IQR =q3-q1

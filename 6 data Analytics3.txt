@@ -1,0 +1,53 @@
+iris=pd.read_csv("IRIS.csv")
+iris.head()
+
+iris.dtypes
+
+from sklearn import preprocessing
+enc = preprocessing.OneHotEncoder()
+enc_iris = pd.DataFrame(enc.fit_transform(iris[['sepal_length']]).toarray())
+enc_iris
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+iris['species'] = le.fit_transform(iris['species'])
+newiris=iris
+iris.head(7)
+
+iris.isnull().head(5)
+
+y = iris.iloc[:, -1].values
+print(y)
+
+x = iris.iloc[:, :-1].values
+print(x)
+
+import pandas as pd
+iris=pd.read_csv("IRIS.csv")
+
+x = iris.drop(['sepal_length'], axis = 1)
+y = iris['sepal_length']
+
+from sklearn.model_selection import train_test_split
+xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size = 0.2,random_state= 0)
+
+GaussianNB(priors=None)
+
+y_pred = gaussian.predict(x_test)
+
+from sklearn.metrics import confusion_matrix,accuracy_score,precision_score,recall_score
+y_true = [2,0,2,2,0,1]
+y_pred = [0,0,2,2,0,2]
+confusion_matrix(y_true,y_pred)
+
+ac = accuracy_score(y_true,y_pred)
+print(ac)
+
+ps = precision_score(y_true,y_pred,average='micro')
+print(ps)
+
+rs = recall_score(y_true, y_pred, average='micro')
+print(rs)
+
+
+

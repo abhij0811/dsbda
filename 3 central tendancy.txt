@@ -1,0 +1,123 @@
+df = pd.read_csv("iris1.csv")
+df.head()
+
+
+df.mean()
+
+df.loc[:,'SepalLengthCm'].mean()
+
+df.mean(axis=1)[0:4]
+
+df.median()
+
+df.loc[:,'SepalWidthCm'].median()
+
+df.median(axis=1)[0:4]
+
+df.mode()
+
+df.loc[:,"SepalLengthCm"].mode()
+
+df.min()
+
+df.loc[:,'PetalWidthCm'].min(skipna = False)
+
+df.max()
+
+df.loc[:,'PetalLengthCm'].min(skipna = False)
+
+df.std()
+
+df.loc[:,'SepalWidthCm'].std()
+
+df.std(axis=1)[0:4]
+
+df.groupby(['Species'])['SepalLengthCm'].mean()
+
+df_u=df.rename(columns= {'SepalWidthCm':'SepalWidthCm'},inplace=False)
+(df_u.groupby(['Species']).SepalWidthCm.mean())
+
+from sklearn import preprocessing
+enc = preprocessing.OneHotEncoder()
+enc_df = pd.DataFrame(enc.fit_transform(df[['SepalLengthCm']]).toarray())
+enc_df
+df_encode =df_u.join(enc_df)
+df_encode
+
+csv_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+col_names = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthcm','Species']
+iris = pd.read_csv(csv_url, names = col_names)
+irisSet = (iris['Species']== 'Iris-setosa')
+print('Iris-setosa')
+print(iris[irisSet].describe())
+
+irisVer = (iris['Species']== 'iris-versicolor')
+print('iris-versicolor')
+print(iris[irisVer].describe())
+
+irisVir = (iris['Species']== 'iris-virginica')
+print('iris-virginica')
+print(iris[irisVir].describe())
+
+######## part 2 ########
+df = pd.read_csv("employee_data.csv")
+df.head()
+
+df.mean()
+
+df.loc[:,'age'].mean()
+
+df.loc[:,'age'].mean()
+
+df.loc[:,'salary'].median()
+
+df.median(axis=1)[0:4]
+
+df.mode()
+
+df.loc[:,'age'].mode()
+
+df.min()
+
+df.loc[:,'age'].min(skipna = False)
+
+df.max()
+
+df.loc[:,'salary'].min(skipna = False)
+
+df.loc[:,'age'].std()
+
+df.std(axis=1)[0:4]
+
+df.groupby(['groups'])['salary'].mean()
+
+df_u=df.rename(columns= {'salary':'income'},inplace=False)
+(df_u.groupby(['groups']).income.mean())
+
+from sklearn import preprocessing
+enc = preprocessing.LabelEncoder()
+df['groups'] = enc.fit_transform(df['groups'])
+df1=df
+df
+
+from sklearn import preprocessing
+enc = preprocessing.OneHotEncoder()
+enc_df = pd.DataFrame(enc.fit_transform(df[['groups']]).toarray())
+df_encode =df_u.join(enc_df)
+df_encode
+
+iris = pd.read_csv("iris.csv")
+iris.head()
+
+irisSet = (iris['species']== 'setosa')
+print('setosa')
+print(iris[irisSet].describe())
+
+irisVer = (iris['species']== 'versicolor')
+print('versicolor')
+print(iris[irisVer].describe())
+
+irisVir = (iris['species']== 'virginica')
+print('virginica')
+print(iris[irisVir].describe())
+
